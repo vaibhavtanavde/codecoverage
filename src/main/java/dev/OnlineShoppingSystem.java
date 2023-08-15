@@ -77,7 +77,6 @@ public class OnlineShoppingSystem {
 
         System.out.println("Total amount: $" + totalAmount);
         System.out.println("Enter payment details...");
-        // Assume payment process here
         System.out.println("Payment successful!");
         shoppingCart.clear();
         totalAmount = 0.0;
@@ -99,8 +98,6 @@ public class OnlineShoppingSystem {
 
         if (shoppingSystem.login(username, password)) {
             System.out.println("Login successful!");
-
-            // Simulate user actions
             String searchKeyword = "Product";
             shoppingSystem.searchProduct(searchKeyword);
 
