@@ -24,6 +24,7 @@ public class OnlineShoppingSystemTest {
 
     @Test
     public void testLoginFailure() {
+    	//
         boolean result = shoppingSystem.login("invalidUsername", "invalidPassword");
         Assert.assertFalse(result, "Login should fail with invalid credentials");
     }

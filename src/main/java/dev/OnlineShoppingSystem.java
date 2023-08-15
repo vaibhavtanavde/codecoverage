@@ -33,7 +33,7 @@ public class OnlineShoppingSystem {
     public OnlineShoppingSystem() {
         userDatabase = new HashMap<>();
         userDatabase.put("username", "password");
-
+//
         products = new ArrayList<>();
         products.add(new Product("Product 1", 10.99));
         products.add(new Product("Product 2", 25.49));
