@@ -33,7 +33,6 @@ public class OnlineShoppingSystem {
     public OnlineShoppingSystem() {
         userDatabase = new HashMap<>();
         userDatabase.put("username", "password");
-//
         products = new ArrayList<>();
         products.add(new Product("Product 1", 10.99));
         products.add(new Product("Product 2", 25.49));
@@ -46,6 +45,30 @@ public class OnlineShoppingSystem {
     public boolean login(String username, String password) {
         String storedPassword = userDatabase.get(username);
         return storedPassword != null && storedPassword.equals(password);
+    }
+    
+    public void viewUserProfile(String username) {
+        if (userDatabase.containsKey(username)) {
+            System.out.println("User Profile for " + username);
+        } else {
+            System.out.println("Username not found.");
+        }
+    }
+    
+    public void updatePassword(String username, String newPassword) {
+        if (userDatabase.containsKey(username)) {
+            userDatabase.put(username, newPassword);
+            System.out.println("Password updated successfully.");
+        } else {
+            System.out.println("Username not found.");
+        }
+    }
+    
+    public void listAllProducts() {
+        System.out.println("Available Products:");
+        for (Product product : products) {
+            System.out.println(product.getTitle() + " - $" + product.getPrice());
+        }
     }
 
     public void searchProduct(String keyword) {
@@ -68,6 +91,29 @@ public class OnlineShoppingSystem {
         }
         System.out.println("Product not found.");
     }
+    
+    public void viewCart() {
+        if (shoppingCart.isEmpty()) {
+            System.out.println("Your cart is empty.");
+        } else {
+            System.out.println("Shopping Cart:");
+            for (Product product : shoppingCart) {
+                System.out.println(product.getTitle() + " - $" + product.getPrice());
+            }
+            System.out.println("Total amount in cart: $" + totalAmount);
+        }
+    }
+    
+    public boolean verifyProductTitle(String productTitle) {
+        for (Product product : products) {
+            if (product.getTitle().equals(productTitle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
 
     public void makePayment() {
         if (shoppingCart.isEmpty()) {
@@ -82,14 +128,7 @@ public class OnlineShoppingSystem {
         totalAmount = 0.0;
     }
 
-    public boolean verifyProductTitle(String productTitle) {
-        for (Product product : products) {
-            if (product.getTitle().equals(productTitle)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     public static void main(String[] args) {
         OnlineShoppingSystem shoppingSystem = new OnlineShoppingSystem();

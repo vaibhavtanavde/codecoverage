@@ -24,9 +24,30 @@ public class OnlineShoppingSystemTest {
 
     @Test
     public void testLoginFailure() {
-    	//
         boolean result = shoppingSystem.login("invalidUsername", "invalidPassword");
         Assert.assertFalse(result, "Login should fail with invalid credentials");
+    }
+    
+    @Test
+    public void testViewUserProfile() {
+        String existingUsername = "username";
+        shoppingSystem.viewUserProfile(existingUsername);
+        String nonExistingUsername = "nonexistentuser";
+        shoppingSystem.viewUserProfile(nonExistingUsername);
+    }
+    
+    @Test
+    public void testUpdatePassword() {
+        String existingUsername = "username";
+        String newPassword = "newpassword";
+        shoppingSystem.updatePassword(existingUsername, newPassword);
+        boolean loginResult = shoppingSystem.login(existingUsername, newPassword);
+        Assert.assertTrue(loginResult, "Password update should be successful.");
+    }
+
+    @Test
+    public void testListAllProducts() {
+        shoppingSystem.listAllProducts();
     }
 
     @Test
@@ -44,15 +65,14 @@ public class OnlineShoppingSystemTest {
         String invalidProductTitle = "Invalid Product";
         shoppingSystem.addToCart(invalidProductTitle);
     }
-
+    
     @Test
-    public void testMakePayment() {
-        String productTitle = "Product 3";
+    public void testViewCartEmpty() {
+        shoppingSystem.viewCart();
+        String productTitle = "Product 1";
         shoppingSystem.addToCart(productTitle);
-        shoppingSystem.makePayment();
-        shoppingSystem.makePayment();
+        shoppingSystem.viewCart();
     }
-
     @Test
     public void testVerifyProductTitle() {
         String existingProductTitle = "Product 1";
@@ -62,5 +82,15 @@ public class OnlineShoppingSystemTest {
         result = shoppingSystem.verifyProductTitle(nonExistingProductTitle);
         Assert.assertFalse(result, "Product title should not exist");
     }
+
+
+    @Test
+    public void testMakePayment() {
+        String productTitle = "Product 3";
+        shoppingSystem.addToCart(productTitle);
+        shoppingSystem.makePayment();
+        shoppingSystem.makePayment();
+    }
+
 }
 
